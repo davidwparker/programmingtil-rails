@@ -25,6 +25,114 @@ Things you may want to cover:
 
 # COMMANDS and things
 
+## EPISODE 5
+
+Gemfile
+```ruby
+  # RSpec for testing
+  # https://github.com/rspec/rspec-rails
+  gem 'rspec-rails'
+  # Needed for rspec
+  gem 'rexml'
+  gem 'spring-commands-rspec'
+  # https://github.com/grosser/parallel_tests
+  gem 'parallel_tests'
+
+  # .env environment variable
+  # https://github.com/bkeepers/dotenv
+  gem 'dotenv-rails'
+
+  group :test do
+    # Adds support for Capybara system testing and selenium driver
+    gem 'capybara', '>= 2.15'
+    gem 'selenium-webdriver'
+    # Easy installation and use of web drivers to run system tests with browsers
+    gem 'webdrivers'
+
+    # Code coverage
+    # https://github.com/colszowka/simplecov
+    gem 'simplecov', require: false
+
+    # Clear out database between runs
+    # https://github.com/DatabaseCleaner/database_cleaner
+    gem 'database_cleaner-active_record'
+  end
+```
+
+routes.rb
+```ruby
+  # Ping to ensure site is up
+  resources :ping, only: [:index] do
+    collection do
+      get :auth
+    end
+  end
+```
+
+en.yml
+```yml
+en:
+  controllers:
+    confirmations:
+      resent: "Confirmation email sent successfully."
+      success: "Email confirmed successfully."
+    passwords:
+      email_required: "Email is required."
+      email_sent: "Email sent. Please check your inbox."
+      success: "Password updated successfully. You may need to sign in again."
+    registrations:
+      confirm: "Please confirm your email address."
+    sessions:
+      sign_out: "Signed out successfully."
+```
+
+confirmations_controller.rb
+passwords_controller.rb
+registrations_controller.rb
+sessions_controller.rb
+
+ping_controller.rb
+```ruby
+class PingController < ApplicationController
+  before_action :authenticate_user!, only: [:auth]
+
+  # GET /ping
+  def index
+    render body: nil, status: 200
+  end
+
+  # GET /ping/auth
+  def auth
+    render body: nil, status: 200
+  end
+end
+```
+
+ping_request_spec.rb
+```ruby
+require 'rails_helper'
+
+RSpec.describe "Pings", type: :request do
+  it 'Returns a status of 200' do
+    get '/ping/'
+    expect(response).to have_http_status(200)
+  end
+
+  it 'Returns a status of 401 if not logged in' do
+    get '/ping/auth/'
+    expect(response).to have_http_status(401)
+  end
+
+  it 'Returns a status of 200 if logged in' do
+    user = create_user
+    headers = get_headers(user.username)
+
+    get '/ping/auth/', headers: headers
+    expect(response).to have_http_status(200)
+  end
+end
+```
+
 ## EPISODE 4
 
 Gemfile
