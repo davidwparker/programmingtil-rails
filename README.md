@@ -43,6 +43,7 @@ gem 'rack-cors'
 
 ```
 rake db:create
+bundle install
 ```
 
 ```
