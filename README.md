@@ -51,6 +51,8 @@ rails generate devise user
 rails db:migrate
 ```
 
+## EPISODE 3
+
 devise.rb
 ```ruby
   config.jwt do |jwt|
@@ -65,4 +67,49 @@ devise.rb
     # Use default aud_header
     jwt.aud_header = 'JWT_AUD'
   end
+```
+
+user.rb
+```ruby
+  devise :database_authenticatable,
+    :confirmable,
+    :registerable,
+    :recoverable,
+    :rememberable,
+    :validatable,
+    :jwt_authenticatable,
+    jwt_revocation_strategy: self
+```
+
+```bash
+rails g migration createAllowlistedJwts
+```
+
+create_allowlisted_jwts.rb
+```ruby
+  def change
+    create_table :allowlisted_jwts do |t|
+      t.references :users, foreign_key: { on_delete: :cascade }, null: false
+      t.string :jti, null: false
+      t.string :aud, null: false
+      t.datetime :exp, null: false
+      t.string :remote_ip
+      t.string :os_data
+      t.string :browser_data
+      t.string :device_data
+      t.timestamps null: false
+    end
+
+    add_index :allowlisted_jwts, :jti, unique: true
+  end
+```
+
+models/allowlisted_jwt.rb
+```ruby
+class AllowlistedJwt < ApplicationRecord
+end
+```
+
+```
+rake db:migrate
 ```
