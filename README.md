@@ -86,6 +86,7 @@ en:
       sign_out: "Signed out successfully."
 ```
 
+application_controllerb.rb
 confirmations_controller.rb
 passwords_controller.rb
 registrations_controller.rb
@@ -132,6 +133,17 @@ RSpec.describe "Pings", type: :request do
   end
 end
 ```
+
+devise.rb
+```ruby
+  config.warden do |manager|
+    manager.failure_app = DeviseCustomFailure
+  end
+```
+
+application.rb
+lib/DeviseCustomFailure.rb
+models/user.rb
 
 ## EPISODE 4
 

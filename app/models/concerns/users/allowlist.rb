@@ -6,7 +6,6 @@ module Users::Allowlist
 
     # @see Warden::JWTAuth::Interfaces::RevocationStrategy#jwt_revoked?
     def self.jwt_revoked?(payload, user)
-      pp payload.slice('jti', 'aud')
       !user.allowlisted_jwts.exists?(payload.slice('jti', 'aud'))
     end
 
@@ -19,7 +18,6 @@ module Users::Allowlist
 
   # Warden::JWTAuth::Interfaces::User#on_jwt_dispatch
   def on_jwt_dispatch(_token, payload)
-    pp payload['aud']
     prev_token = allowlisted_jwts.where(aud: payload['aud']).where.not(exp: ..Time.now).last
     token = allowlisted_jwts.create!(
       jti: payload['jti'],
