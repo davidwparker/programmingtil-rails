@@ -1,7 +1,7 @@
 class CreateAllowlistedJwts < ActiveRecord::Migration[6.1]
   def change
     create_table :allowlisted_jwts do |t|
-      t.references :users, foreign_key: { on_delete: :cascade }, null: false
+      t.references :user, foreign_key: { on_delete: :cascade }, null: false
       t.string :jti, null: false
       t.string :aud, null: false
       t.datetime :exp, null: false
