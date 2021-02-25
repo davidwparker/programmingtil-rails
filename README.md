@@ -25,6 +25,11 @@ Things you may want to cover:
 
 # COMMANDS and things
 
+## EPISODE 6
+
+```ruby
+  gem 'simplecov', require: false
+```
 ## EPISODE 5
 
 Gemfile
