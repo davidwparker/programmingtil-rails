@@ -59,6 +59,8 @@ development:
 test:
   <<: *default
   database: programmingtil_rails_1_test
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
   host: 127.0.0.1
 
 # As with config/credentials.yml, you never want to store sensitive information,

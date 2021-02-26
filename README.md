@@ -25,6 +25,68 @@ Things you may want to cover:
 
 # COMMANDS and things
 
+## EPISODE 7
+
+Github Actions
+
+database.yml
+```yml
+test:
+  <<: *default
+  database: programmingtil_rails_1_test
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  host: 127.0.0.1
+```
+
+.github/workflows/run_specs.yml
+```yml
+env:
+  RUBY_VERSION: 3.0.0
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_DB: programmingtil_rails_1_test
+  DEVISE_JWT_SECRET_KEY: ${{ secrets.DEVISE_JWT_SECRET_KEY }}
+
+name: Rails Specs
+on: [push,pull_request]
+jobs:
+  rspec-test:
+    name: RSpec
+    runs-on: ubuntu-20.04
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+        - 5432:5432
+        env:
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+      - name: Install postgres client
+        run: sudo apt-get install libpq-dev
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundler install
+      - name: Create database
+        run: |
+          bundler exec rails db:create RAILS_ENV=test
+          bundler exec rails db:migrate RAILS_ENV=test
+      - name: Run tests
+        run: bundler exec rspec spec/*
+      - name: Upload coverage results
+        uses: actions/upload-artifact@master
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage
+```
+
 ## EPISODE 6
 
 ```ruby
