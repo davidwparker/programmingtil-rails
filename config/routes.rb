@@ -13,4 +13,8 @@ Rails.application.routes.draw do
       get :auth
     end
   end
+
+  namespace :users do
+    get "sign-in", to: "sessions#new"
+  end
 end

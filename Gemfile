@@ -60,6 +60,10 @@ group :development do
   # Annotate models and more
   # https://github.com/ctran/annotate_models
   gem 'annotate'
+
+  # Local Emails
+  # https://github.com/ryanb/letter_opener
+  gem 'letter_opener'
 end
 
 group :test do

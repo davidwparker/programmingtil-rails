@@ -25,6 +25,39 @@ Things you may want to cover:
 
 # COMMANDS and things
 
+rails s
+
+## EPISODE 8
+
+config/initializers/cors.rb
+```ruby
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins '*'
+
+    resource '*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head]
+  end
+end
+```
+
+Gemfile
+```ruby
+  # Local Emails
+  # https://github.com/ryanb/letter_opener
+  gem 'letter_opener'
+```
+
+config/environments/development.rb
+```ruby
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3001 }
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.perform_caching = false
+  config.action_mailer.perform_deliveries = true
+```
+
 ## EPISODE 7
 
 Github Actions
