@@ -27,6 +27,33 @@ Things you may want to cover:
 
 rails s
 
+## EPISODE 9
+
+Create Heroku account
+Install setup Heroku CLI
+Create pipeline
+Create staging application
+Create production application
+
+Install add-ons:
+* Heroku Postgres
+
+ENV variables:
+* DEVISE_JWT_SECRET_KEY
+* RACK_ENV
+* RAILS_ENV
+* RAILS_LOG_TO_STDOUT
+* RAILS_SERVE_STATIC_FILES
+* SECRET_KEY_BASE
+
+Procfile
+
+heroku git:remote -a ptil-rails-staging-api
+git push heroku ep9:master
+
+heroku run rails db:migrate -a ptil-rails-staging-api
+heroku run rails c -a ptil-rails-staging-api
+
 ## EPISODE 8
 
 config/initializers/cors.rb
