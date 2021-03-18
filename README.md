@@ -27,6 +27,38 @@ Things you may want to cover:
 
 rails s
 
+## EPISODE 11
+
+In heroku, add Mailgun addon.
+
+Under environment variables, add each:
+
+```
+MAILGUN_SMTP_LOGIN -> MAIL_PROVIDER_USERNAME
+MAILGUN_SMTP_PASSWORD -> MAIL_PROVIDER_PASSWORD
+MAILGUN_SMTP_PORT -> MAIL_PROVIDER_PORT
+MAILGUN_SMTP_SERVER -> MAIL_PROVIDER_ADDRESS
+```
+
+Delete the old MAILGUN_X ones.
+
+In Mailgun, add your email to authorized emails + confirm it.
+
+## EPISODE 10
+
+Promote to production
+
+heroku run rails db:migrate -a ptil-rails-api
+heroku run rails c -a ptil-rails-api
+
+Addons:
+* Bug Tracking - Honeybadger
+* Performance / Monitoring - Librato
+* Performance / Monitoring - New Relic
+* Logging - Logentries
+* Redis - Redis Enterprise Cloud
+* Cron - Heroku Scheduler
+
 ## EPISODE 9
 
 Create Heroku account

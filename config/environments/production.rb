@@ -110,4 +110,16 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  Rails.application.routes.default_url_options[:host]= ENV['HOST_URL']
+
+  ActionMailer::Base.smtp_settings = {
+    :authentication => :plain,
+    :address        => ENV['MAIL_PROVIDER_ADDRESS'],
+    :port           => ENV['MAIL_PROVIDER_PORT'],
+    :user_name      => ENV['MAIL_PROVIDER_USERNAME'],
+    :password       => ENV['MAIL_PROVIDER_PASSWORD'],
+    # :domain         => 'heroku.com',
+    :enable_starttls_auto => true
+  }
 end
