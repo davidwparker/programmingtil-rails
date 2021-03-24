@@ -14,6 +14,17 @@ Rails.application.routes.draw do
     end
   end
 
+  # APIs
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [] do
+        collection do
+          get :available
+        end
+      end
+    end
+  end
+
   namespace :users do
     get "sign-in", to: "sessions#new"
   end

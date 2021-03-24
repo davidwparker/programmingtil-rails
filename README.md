@@ -27,6 +27,34 @@ Things you may want to cover:
 
 rails s
 
+## EPISODE 12
+
+Adding usernames:
+```
+migration > rails g migration addNamesThemesToUser
+config/initializers/devise.rb
+controllers/application_controller.rb
+model/user.rb
+views/devise/mailer/confirmation_instructions.html.erb
+```
+
+Fixing specs:
+```
+spec/support/object_creators.rb
+```
+
+Changes:
+```
+config/environments/development.rb (port)
+```
+
+Upcoming:
+```
+config/routes.rb
+controllers/api/v1/users_controller.rb
+spec/requests/users_request_spec.rb
+```
+
 ## EPISODE 11
 
 In heroku, add Mailgun addon.
@@ -110,7 +138,7 @@ Gemfile
 
 config/environments/development.rb
 ```ruby
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3001 }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 5000 }
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.perform_caching = false

@@ -14,6 +14,11 @@
 #  unconfirmed_email      :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  username               :string
+#  display_name           :string
+#  slug                   :string
+#  theme                  :integer          default(0)
+#  theme_color            :integer          default(0)
 #
 # Indexes
 #
@@ -33,7 +38,31 @@ class User < ApplicationRecord
     :jwt_authenticatable,
     jwt_revocation_strategy: self
 
-  has_many :allowlisted_jwts, dependent: :destroy
+  validates :email,
+    presence: true,
+    uniqueness: { case_sensitive: false }
+  validates :username,
+    presence: true,
+    length: { minimum: 2 },
+    uniqueness: { case_sensitive: false }
+
+  # DEVISE-specific things
+  # Devise override for logging in with username or email
+  attr_writer :login
+
+  def login
+    @login || username || email
+  end
+
+  # Use :login for searching username and email
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    login = conditions.delete(:login)
+    where(conditions).where([
+      "lower(username) = :value OR lower(email) = :value",
+      { value: login.strip.downcase },
+    ]).first
+  end
 
   def for_display
     {
