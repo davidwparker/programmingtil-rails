@@ -1,4 +1,6 @@
 class Api::V1::UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:update]
+
   # GET /api/v1/users/available
   def available
     free = if params[:email].present?
@@ -9,5 +11,26 @@ class Api::V1::UsersController < ApplicationController
       true
     end
     render json: { data: free }
+  end
+
+  # authenticate_user!
+  # PUT /api/v1/users/#{id}
+  def update
+    current_user.update(user_params)
+    render json: {
+      message: I18n.t('controllers.users.updated'),
+      user: current_user.for_display
+    }
+  rescue => error
+    render json: { error: I18n.t('api.oops') }, status: 500
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(
+      :display_name,
+      :username
+    )
   end
 end

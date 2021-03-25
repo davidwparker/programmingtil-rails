@@ -27,6 +27,14 @@ Things you may want to cover:
 
 rails s
 
+## EPISODE 13
+
+routes.rb
+controllers/api/v1/users_controller.rb
+en.yml
+models/user.rb
+spec/requests/users_request_spec.rb
+
 ## EPISODE 12
 
 Adding usernames:

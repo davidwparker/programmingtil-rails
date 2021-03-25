@@ -66,8 +66,10 @@ class User < ApplicationRecord
 
   def for_display
     {
+      displayName: display_name,
       email: email,
       id: id,
+      username: username,
     }
   end
 end
