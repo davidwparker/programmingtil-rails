@@ -27,13 +27,34 @@ Things you may want to cover:
 
 rails s
 
+## EPISODE 14
+
+Backend, and why using localStorage:
+https://github.com/waiting-for-dev/devise-jwt/issues/126
+
+tldr;
+* cannot use different domains.
+* long-term, we'll be using the same APIs with our mobile app.
+* update to check and compare/use the AUD
+
+Concerns
+* XSS
+
+```
+config/initializers/cors.rb
+models/concerns/users/allowlist.rb
+controllers/sessions_controller.rb
+```
+
 ## EPISODE 13
 
+```
 routes.rb
 controllers/api/v1/users_controller.rb
 en.yml
 models/user.rb
 spec/requests/users_request_spec.rb
+```
 
 ## EPISODE 12
 

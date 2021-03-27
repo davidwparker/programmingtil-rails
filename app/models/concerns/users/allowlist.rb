@@ -21,7 +21,7 @@ module Users::Allowlist
     prev_token = allowlisted_jwts.where(aud: payload['aud']).where.not(exp: ..Time.now).last
     token = allowlisted_jwts.create!(
       jti: payload['jti'],
-      aud: payload['aud'].presence || 'UNKNOWN',
+      aud: payload['aud'],
       exp: Time.at(payload['exp'].to_i)
     )
     if token.present? && prev_token.present?

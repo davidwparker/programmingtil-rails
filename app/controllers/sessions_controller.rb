@@ -1,11 +1,18 @@
+require 'digest'
+
 class SessionsController < Devise::SessionsController
   respond_to :json
 
   # POST /users/sign_in
   # Specs No
   def create
+    browser, version = params[:browser].split("||")
+    digest = Digest::SHA256.hexdigest("#{params[:os]}||||#{browser}||#{version.to_i}")
     # Check both because rspec vs normal server requests .... do different things? WTF.
     possible_aud = request.headers['HTTP_JWT_AUD'].presence || request.headers['JWT_AUD'].presence
+    if digest != possible_aud
+      raise "Unmatched AUD"
+    end
     self.resource = warden.authenticate!(auth_options)
     sign_in(resource_name, resource)
     if user_signed_in?
@@ -14,7 +21,7 @@ class SessionsController < Devise::SessionsController
       # For the initial login, we need to manually update IP / metadata for JWT here as no hooks
       # And we'll want this data for all subsequent requests
       last = resource.allowlisted_jwts.where(aud: possible_aud).last
-      aud = possible_aud || 'UNKNOWN'
+      aud = possible_aud
       if last.present?
         last.update_columns({
           browser_data: params[:browser],
@@ -45,7 +52,7 @@ class SessionsController < Devise::SessionsController
     render json: {
       user: resource.for_display,
       jwt: current_token,
-      aud: opts[:aud],
+      # aud: opts[:aud],
     }
   end
 
