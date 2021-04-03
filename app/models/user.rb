@@ -28,6 +28,7 @@
 #
 class User < ApplicationRecord
   include Users::Allowlist
+  include Users::Associations
 
   devise :database_authenticatable,
     :confirmable,
@@ -37,14 +38,6 @@ class User < ApplicationRecord
     :validatable,
     :jwt_authenticatable,
     jwt_revocation_strategy: self
-
-  validates :email,
-    presence: true,
-    uniqueness: { case_sensitive: false }
-  validates :username,
-    presence: true,
-    length: { minimum: 2 },
-    uniqueness: { case_sensitive: false }
 
   # DEVISE-specific things
   # Devise override for logging in with username or email

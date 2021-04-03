@@ -8,6 +8,16 @@ module ObjectCreators
     )
   end
 
+  def create_post(params = {})
+    user = params[:user].presence || create_user
+    last_id = Post.limit(1).order(id: :desc).pluck(:id).first || 0
+    Post.create!({
+      title: params[:title].presence || "Post #{last_id+1}",
+      content: params[:content].presence || "Post content #{last_id+1}",
+      user_id: user.id
+    })
+  end
+
   def create_user(params = {})
     last_id = User.limit(1).order(id: :desc).pluck(:id).first || 0
     user = User.new(

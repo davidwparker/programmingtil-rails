@@ -27,6 +27,27 @@ Things you may want to cover:
 
 rails s
 
+## EPISODE 15 - creating a blog
+
+```
+rails g migration createPosts
+rake db:migrate
+```
+
+Files
+```
+db/migrations/XXX_create_posts.rb
+app/models/post.rb
+app/models/user.rb
+app/models/concerns/posts/associations.rb
+app/models/concerns/posts/validations.rb
+app/models/concerns/users/associations.rb
+app/models/concerns/users/validations.rb
+config/routes.rb
+spec/requests/posts_request_spec.rb
+spec/support/object_creators.rb
+```
+
 ## EPISODE 14
 
 Backend, and why using localStorage:
