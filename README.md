@@ -27,6 +27,24 @@ Things you may want to cover:
 
 rails s
 
+## EPISODE 16 - create/update/delete posts
+
+```
+Gemfile
+app/controllers/api/v1/posts_controller.rb
+app/controllers/application_controller.rb
+app/models/post.rb
+app/models/concerns/posts/logic.rb
+app/policies/application_policy.rb
+app/policies/post_policy.rb
+app/serializers/post_index_serializer.rb
+app/serializers/post_show_serializer.rb
+config/locales/en.yml
+config/routes.rb
+spec/requests/posts_request_spec.rb
+spec/support/object_creators.rb
+```
+
 ## EPISODE 15 - creating a blog
 
 ```

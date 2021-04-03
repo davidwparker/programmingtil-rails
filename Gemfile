@@ -34,6 +34,15 @@ gem 'devise', github: 'heartcombo/devise'
 # https://github.com/waiting-for-dev/devise-jwt
 gem 'devise-jwt'
 
+# Authorization
+# https://github.com/varvet/pundit
+gem 'pundit'
+
+# JSON API
+# Previously known as FastJson API
+# https://github.com/jsonapi-serializer/jsonapi-serializer
+gem 'jsonapi-serializer'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

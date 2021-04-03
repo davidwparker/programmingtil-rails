@@ -16,5 +16,6 @@
 #
 class Post < ApplicationRecord
   include Posts::Associations
+  include Posts::Logic
   include Posts::Validations
 end

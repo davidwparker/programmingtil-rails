@@ -32,20 +32,36 @@ module ObjectCreators
   end
 
   # CONVENIENCE methods
+  def get_aud
+    Digest::SHA256.hexdigest("#{get_os}||||#{get_browser}")
+  end
+
+  def get_browser
+    'Chrome||89'
+  end
+
+  def get_os
+    'Linux||5.0'
+  end
+
   def get_headers(login)
     jwt = get_jwt(login)
     {
       "Accept": "application/json",
       "Content-Type": "application/json",
-      'HTTP_JWT_AUD': 'test',
+      'HTTP_JWT_AUD': get_aud,
       'Authorization': "Bearer #{jwt}"
     }
   end
 
   def get_jwt(login)
     # NOTE: RSPEC sucks (uses HTTP_ because WTF)
-    headers = { 'HTTP_JWT_AUD': 'test' }
-    post '/users/sign_in', params: { user: { login: login, password: 'testtest' } }, headers: headers
+    headers = { 'HTTP_JWT_AUD': get_aud }
+    post '/users/sign_in', params: {
+      user: { login: login, password: 'testtest' },
+      browser: get_browser,
+      os: get_os
+    }, headers: headers
     JSON.parse(response.body, object_class: OpenStruct).jwt
   end
 end

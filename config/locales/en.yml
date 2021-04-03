@@ -14,6 +14,10 @@ en:
       email_required: "Email is required."
       email_sent: "Email sent. Please check your inbox."
       success: "Password updated successfully. You may need to sign in again."
+    posts:
+      created: "Post created successfully."
+      deleted: "Post deleted successfully."
+      updated: "Post updated successfully."
     registrations:
       confirm: "Please confirm your email address."
     sessions:
