@@ -324,4 +324,7 @@ Devise.setup do |config|
     # Use default aud_header
     jwt.aud_header = 'JWT_AUD'
   end
+  config.jwt_cookie do |jwt_cookie|
+    jwt_cookie.name = 'jwt'
+  end
 end

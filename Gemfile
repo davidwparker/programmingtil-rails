@@ -33,6 +33,7 @@ gem 'devise', github: 'heartcombo/devise'
 # JWT devise for API
 # https://github.com/waiting-for-dev/devise-jwt
 gem 'devise-jwt'
+gem 'devise-jwt-cookie', github: 'davidwparker/devise-jwt-cookie'
 
 # Authorization
 # https://github.com/varvet/pundit

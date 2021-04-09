@@ -62,7 +62,8 @@ module ObjectCreators
       browser: get_browser,
       os: get_os
     }, headers: headers
-    JSON.parse(response.body, object_class: OpenStruct).jwt
+    # JSON.parse(response.body, object_class: OpenStruct).jwt
+    response.cookies['jwt']
   end
 end
 

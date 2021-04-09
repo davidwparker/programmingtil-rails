@@ -37,6 +37,7 @@ class User < ApplicationRecord
     :rememberable,
     :validatable,
     :jwt_authenticatable,
+    :jwt_cookie_authenticatable,
     jwt_revocation_strategy: self
 
   # DEVISE-specific things

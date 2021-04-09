@@ -27,6 +27,23 @@ Things you may want to cover:
 
 rails s
 
+## EPISODE 17 - cookie authentication
+
+```
+Gemfile
+Gemfile.lock
+app/controllers/application_controller.rb
+app/controllers/sessions_controller.rb
+app/models/concerns/posts/logic.rb
+app/models/concerns/posts/validations.rb
+app/models/user.rb
+app/policies/post_policy.rb
+config/initializers/cors.rb
+config/initializers/devise.rb
+spec/requests/posts_request_spec.rb
+spec/support/object_creators.rb
+```
+
 ## EPISODE 16 - create/update/delete posts
 
 ```

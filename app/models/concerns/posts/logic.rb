@@ -11,12 +11,12 @@ module Posts::Logic
     end
 
     def self.delete_post!(post)
-      post.destroy
+      post.destroy!
       post
     end
 
     def self.update_post!(post, params)
-      post.update(params)
+      post.update!(params)
       post
     end
   end

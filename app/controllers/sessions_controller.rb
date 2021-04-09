@@ -51,7 +51,7 @@ class SessionsController < Devise::SessionsController
     # be, in case of race conditions and such
     render json: {
       user: resource.for_display,
-      jwt: current_token,
+      # jwt: current_token,
       # aud: opts[:aud],
     }
   end

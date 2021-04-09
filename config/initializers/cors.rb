@@ -15,6 +15,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       origins origins
       resource '*',
         headers: :any,
+        credentials: true,
         methods: %i(get post put patch delete options head)
     end
   else
@@ -25,6 +26,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       origins origins
       resource '*',
         headers: :any,
+        credentials: true,
         methods: %i(get post put patch delete options head)
     end
   end
