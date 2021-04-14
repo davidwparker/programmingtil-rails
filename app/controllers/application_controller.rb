@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::API
   include Pundit
 
+  rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -56,6 +57,12 @@ class ApplicationController < ActionController::API
   end
 
   private
+
+  def record_invalid(exception)
+    message = exception.message.partition('Validation failed: ').last
+    render json: { meta: { message: message } }, status: 401
+    return
+  end
 
   def user_not_authorized
     render json: { message: I18n.t('api.unauthorized') }, status: 404

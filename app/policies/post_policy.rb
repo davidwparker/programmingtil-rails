@@ -7,7 +7,8 @@ class PostPolicy < ApplicationPolicy
 
   # Users can only create up to 3 posts
   def create?
-    user.posts.size < 3
+    # user.posts.size < 3
+    true
   end
 
   # Only an user can destroy their own

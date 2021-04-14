@@ -42,6 +42,30 @@ RSpec.describe "api/v1/users", type: :request do
     end
   end
 
+  context "show" do
+    it 'Returns a status of 404 if does not exist' do
+      get '/api/v1/users/name'
+      parsed = JSON.parse(response.body, object_class: OpenStruct)
+      expect(response).to have_http_status(404)
+    end
+
+    it 'Returns user if sending back slug' do
+      user = create_user(name: 'testtest')
+      get "/api/v1/users/#{user.slug}"
+      parsed = JSON.parse(response.body, object_class: OpenStruct)
+      expect(response).to have_http_status(200)
+      expect(parsed.data.id.to_i).to eq(user.id)
+    end
+
+    it 'Returns user if sending back id' do
+      user = create_user(name: 'testtest')
+      get "/api/v1/users/#{user.id}"
+      parsed = JSON.parse(response.body, object_class: OpenStruct)
+      expect(response).to have_http_status(200)
+      expect(parsed.data.id.to_i).to eq(user.id)
+    end
+  end
+
   context "update" do
     it 'Requires a user' do
       user = create_user

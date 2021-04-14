@@ -13,6 +13,14 @@ class Api::V1::UsersController < ApplicationController
     render json: { data: free }
   end
 
+  # GET /api/v1/users/#{slug}
+  def show
+    user = User.friendly.find(params[:id])
+    render json: UserShowSerializer.new(user, show_options).serializable_hash.to_json
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: I18n.t('api.not_found') }, status: 404
+  end
+
   # authenticate_user!
   # PUT /api/v1/users/#{id}
   def update

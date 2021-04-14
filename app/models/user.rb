@@ -25,6 +25,7 @@
 #  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_slug                  (slug) UNIQUE
 #
 class User < ApplicationRecord
   include Users::Allowlist
@@ -38,6 +39,9 @@ class User < ApplicationRecord
     :validatable,
     :jwt_authenticatable,
     jwt_revocation_strategy: self
+
+  extend FriendlyId
+  friendly_id :username, use: [:slugged]
 
   # DEVISE-specific things
   # Devise override for logging in with username or email

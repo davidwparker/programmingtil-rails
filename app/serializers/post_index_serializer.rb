@@ -6,6 +6,13 @@ class PostIndexSerializer
   attributes :id,
     :content,
     :published_at,
-    :title,
-    :user_id
+    :title
+
+  attributes :user do |post|
+    {
+      displayName: post.user.display_name.presence || post.user_id,
+      id: post.user_id,
+      slug: post.user.slug,
+    }
+  end
 end

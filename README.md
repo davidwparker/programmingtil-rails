@@ -27,6 +27,45 @@ Things you may want to cover:
 
 rails s
 
+## EPISODE 18 - friendly URLs via the friendly gem
+
+* https://github.com/norman/friendly_id
+
+```
+rails g migration AddSlugToUsers slug:uniq
+```
+
+Files
+```
+#	modified:   Gemfile
+#	modified:   Gemfile.lock
+#	modified:   README.md
+#	modified:   app/controllers/api/v1/posts_controller.rb
+#	modified:   app/controllers/api/v1/users_controller.rb
+#	modified:   app/controllers/application_controller.rb
+#	modified:   app/models/concerns/posts/logic.rb
+#	modified:   app/models/concerns/posts/validations.rb
+#	modified:   app/models/user.rb
+#	modified:   app/policies/post_policy.rb
+# modified:   app/serializers/post_index_serializer.rb
+#	new file:   app/serializers/user_show_serializer.rb
+#	new file:   config/initializers/friendly_id.rb
+#	modified:   config/routes.rb
+#	new file:   db/migrate/20210414181412_add_slug_to_users.rb
+#	modified:   db/schema.rb
+#	modified:   spec/requests/posts_request_spec.rb
+#	modified:   spec/requests/users_request_spec.rb
+#
+```
+
+After, rails console:
+```
+User.find_each(&:save)
+```
+
+
+## EPISODE 17 - cookies
+
 ## EPISODE 16 - create/update/delete posts
 
 ```

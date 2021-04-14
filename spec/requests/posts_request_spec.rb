@@ -21,19 +21,19 @@ RSpec.describe "api/v1/posts", type: :request do
         expect(parsed.data.attributes.userId).to eq(user.id)
       end
 
-      it 'should not let me create more than 3 posts' do
-        user = create_user
-        headers = get_headers(user.username)
-        url = '/api/v1/posts'
-        post url, params: '{ "post": { "title": "post 1", "content": "content 1" } }', headers: headers
-        post url, params: '{ "post": { "title": "post 2", "content": "content 2" } }', headers: headers
-        post url, params: '{ "post": { "title": "post 3", "content": "content 3" } }', headers: headers
+      # it 'should not let me create more than 3 posts' do
+      #   user = create_user
+      #   headers = get_headers(user.username)
+      #   url = '/api/v1/posts'
+      #   post url, params: '{ "post": { "title": "post 1", "content": "content 1" } }', headers: headers
+      #   post url, params: '{ "post": { "title": "post 2", "content": "content 2" } }', headers: headers
+      #   post url, params: '{ "post": { "title": "post 3", "content": "content 3" } }', headers: headers
 
-        expect(response).to have_http_status(200)
+      #   expect(response).to have_http_status(200)
 
-        post url, params: '{ "post": { "title": "post 4", "content": "content 4" } }', headers: headers
-        expect(response).to have_http_status(404)
-      end
+      #   post url, params: '{ "post": { "title": "post 4", "content": "content 4" } }', headers: headers
+      #   expect(response).to have_http_status(404)
+      # end
     end
   end
 
