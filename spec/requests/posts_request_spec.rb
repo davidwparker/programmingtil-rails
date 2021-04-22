@@ -18,7 +18,7 @@ RSpec.describe "api/v1/posts", type: :request do
         post url, params: '{ "post": { "title": "post 1", "content": "content 1" } }', headers: headers
         parsed = JSON.parse(response.body, object_class: OpenStruct)
         expect(response).to have_http_status(200)
-        expect(parsed.data.attributes.userId).to eq(user.id)
+        expect(parsed.data.attributes.user.id).to eq(user.id)
       end
 
       # it 'should not let me create more than 3 posts' do
@@ -69,7 +69,8 @@ RSpec.describe "api/v1/posts", type: :request do
     end
   end
 
-  context "index" do
+  # Index
+  context 'GET /api/v1/posts' do
     it 'Returns a status of 200 with a list of posts' do
       user = create_user
       create_post({ user: user })
@@ -78,6 +79,33 @@ RSpec.describe "api/v1/posts", type: :request do
       parsed = JSON.parse(response.body, object_class: OpenStruct)
       expect(response).to have_http_status(200)
       expect(parsed.data.size).to eq(2)
+    end
+  end
+
+  # Show
+  context 'GET /api/v1/posts/:slug' do
+    it 'Returns a status of 404 if does not exist' do
+      get '/api/v1/posts/name'
+      parsed = JSON.parse(response.body, object_class: OpenStruct)
+      expect(response).to have_http_status(404)
+    end
+
+    it 'Returns post if sending back slug' do
+      user = create_user(name: 'testtest')
+      post = create_post({ user: user })
+      get "/api/v1/posts/#{post.slug}"
+      parsed = JSON.parse(response.body, object_class: OpenStruct)
+      expect(response).to have_http_status(200)
+      expect(parsed.data.id.to_i).to eq(post.id)
+    end
+
+    it 'Returns post if sending back id' do
+      user = create_user(name: 'testtest')
+      post = create_post({ user: user })
+      get "/api/v1/posts/#{post.id}"
+      parsed = JSON.parse(response.body, object_class: OpenStruct)
+      expect(response).to have_http_status(200)
+      expect(parsed.data.id.to_i).to eq(post.id)
     end
   end
 

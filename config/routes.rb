@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   # APIs
   namespace :api do
     namespace :v1 do
-      resources :posts, only: [:create, :destroy, :update, :index]
+      resources :posts, only: [:create, :destroy, :index, :show, :update]
       resources :users, only: [:show, :update] do
         collection do
           get :available

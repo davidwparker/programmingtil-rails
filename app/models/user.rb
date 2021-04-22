@@ -30,6 +30,7 @@
 class User < ApplicationRecord
   include Users::Allowlist
   include Users::Associations
+  include Users::Validations
 
   devise :database_authenticatable,
     :confirmable,

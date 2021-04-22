@@ -23,6 +23,14 @@ class Api::V1::PostsController < ApplicationController
     render json: PostIndexSerializer.new(posts, list_options).serializable_hash.to_json
   end
 
+  # GET /api/v1/posts/:slug
+  def show
+    post = Post.friendly.find(params[:id])
+    render json: post_show(post)
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: I18n.t('api.not_found') }, status: 404
+  end
+
   # PUT /api/v1/posts/:id
   def update
     post = Post.find(params[:id])
@@ -41,7 +49,7 @@ class Api::V1::PostsController < ApplicationController
     params.require(:post).permit(:id, :title, :content, :published_at)
   end
 
-  def post_show(post, meta)
+  def post_show(post, meta = {})
     PostShowSerializer.new(post, show_options(meta)).serializable_hash.to_json
   end
 end

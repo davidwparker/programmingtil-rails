@@ -24,4 +24,9 @@ en:
       sign_out: "Signed out successfully."
     users:
       updated: "Update successfully."
+  models:
+    users:
+      slug_numbers: "cannot be only numbers, please add at least one character."
+      username: "must be alphanumeric or underscore/dash only and must contain at least one character."
+      username_numbers: "cannot be only numbers, please add at least one character."
 

@@ -27,6 +27,26 @@ Things you may want to cover:
 
 rails s
 
+## EPISODE 19 - fix user validations and post slugs
+
+```
+rails g migration addSlugToPosts
+```
+
+FILES
+```
+modified:   app/controllers/api/v1/posts_controller.rb
+modified:   app/models/concerns/users/validations.rb
+modified:   app/models/post.rb
+modified:   app/models/user.rb
+modified:   app/serializers/post_show_serializer.rb
+modified:   config/locales/en.yml
+modified:   config/routes.rb
+new file:   db/migrate/20210422212211_add_slug_to_posts.rb
+modified:   db/schema.rb
+modified:   spec/requests/posts_request_spec.rb
+```
+
 ## EPISODE 18 - friendly URLs via the friendly gem
 
 * https://github.com/norman/friendly_id
