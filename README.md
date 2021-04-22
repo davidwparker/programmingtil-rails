@@ -27,6 +27,41 @@ Things you may want to cover:
 
 rails s
 
+## EPISODE 20 - comments model
+
+```
+rails g migration createComments
+```
+
+```
+rails db:migrate
+```
+
+files
+```
+#	modified:   README.md
+#	new file:   app/controllers/api/v1/comments_controller.rb
+#	new file:   app/models/comment.rb
+#	new file:   app/models/concerns/abilities/commentable.rb
+#	new file:   app/models/concerns/comments/associations.rb
+#	new file:   app/models/concerns/comments/logic.rb
+#	new file:   app/models/concerns/comments/validations.rb
+#	modified:   app/models/concerns/users/associations.rb
+#	new file:   app/models/concerns/users/logic.rb
+#	modified:   app/models/post.rb
+#	modified:   app/models/user.rb
+#	new file:   app/policies/comment_policy.rb
+#	new file:   app/serializers/comment_index_serializer.rb
+#	modified:   app/serializers/post_index_serializer.rb
+#	modified:   app/serializers/post_show_serializer.rb
+#	modified:   config/locales/en.yml
+#	modified:   config/routes.rb
+#	new file:   db/migrate/20210422213742_create_comments.rb
+#	modified:   db/schema.rb
+#	new file:   spec/requests/comments_request_spec.rb
+#	modified:   spec/support/object_creators.rb
+```
+
 ## EPISODE 19 - fix user validations and post slugs
 
 ```
@@ -45,6 +80,10 @@ modified:   config/routes.rb
 new file:   db/migrate/20210422212211_add_slug_to_posts.rb
 modified:   db/schema.rb
 modified:   spec/requests/posts_request_spec.rb
+```
+
+```
+Post.find_each(&:save)
 ```
 
 ## EPISODE 18 - friendly URLs via the friendly gem

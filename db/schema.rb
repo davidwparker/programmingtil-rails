@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_22_212211) do
+ActiveRecord::Schema.define(version: 2021_04_22_213742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,22 @@ ActiveRecord::Schema.define(version: 2021_04_22_212211) do
     t.index ["user_id"], name: "index_allowlisted_jwts_on_user_id"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string "commentable_type"
+    t.bigint "commentable_id"
+    t.bigint "user_id"
+    t.bigint "thread_id"
+    t.bigint "parent_id"
+    t.text "body", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+    t.index ["parent_id"], name: "index_comments_on_parent_id"
+    t.index ["thread_id"], name: "index_comments_on_thread_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title", null: false
@@ -38,6 +54,7 @@ ActiveRecord::Schema.define(version: 2021_04_22_212211) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
+    t.bigint "comments_count"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

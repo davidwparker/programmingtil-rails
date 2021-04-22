@@ -8,7 +8,7 @@ class PostShowSerializer
     :published_at,
     :title
 
-    attributes :user do |post|
+  attributes :user do |post|
     {
       displayName: post.user.display_name.presence || post.user_id,
       id: post.user_id,

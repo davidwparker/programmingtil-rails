@@ -7,6 +7,10 @@ en:
     oops: "Oops! There was an error."
     unauthorized: "Unauthorized"
   controllers:
+    comments:
+      created: "Comment created successfully."
+      deleted: "Comment deleted successfully."
+      updated: "Comment updated successfully."
     confirmations:
       resent: "Confirmation email sent successfully."
       success: "Email confirmed successfully."

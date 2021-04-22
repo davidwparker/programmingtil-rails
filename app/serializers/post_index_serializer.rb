@@ -4,15 +4,13 @@ class PostIndexSerializer
   set_key_transform :camel_lower
 
   attributes :id,
+    :comments_count,
     :content,
     :published_at,
+    :slug,
     :title
 
   attributes :user do |post|
-    {
-      displayName: post.user.display_name.presence || post.user_id,
-      id: post.user_id,
-      slug: post.user.slug,
-    }
+    post.user.for_others
   end
 end

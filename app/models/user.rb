@@ -30,6 +30,7 @@
 class User < ApplicationRecord
   include Users::Allowlist
   include Users::Associations
+  include Users::Logic
   include Users::Validations
 
   devise :database_authenticatable,
@@ -60,14 +61,5 @@ class User < ApplicationRecord
       "lower(username) = :value OR lower(email) = :value",
       { value: login.strip.downcase },
     ]).first
-  end
-
-  def for_display
-    {
-      displayName: display_name,
-      email: email,
-      id: id,
-      username: username,
-    }
   end
 end
