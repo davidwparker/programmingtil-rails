@@ -12,7 +12,7 @@ module ObjectCreators
     user = params[:user].presence || create_user
     commentable = params[:commentable].presence || create_post
     last_id = Comment.limit(1).order(id: :desc).pluck(:id).first || 0
-    Comment.add_comment(user, {
+    Comment.create_comment!(user, {
       body: params[:body].presence || "Comment #{last_id+1}",
       commentable_id: commentable.id,
       commentable_type: commentable.class.name,

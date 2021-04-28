@@ -10,7 +10,7 @@ class PostIndexSerializer
     :slug,
     :title
 
-  attributes :user do |post|
+  attribute :user do |post|
     post.user.for_others
   end
 end

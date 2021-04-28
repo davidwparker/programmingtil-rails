@@ -92,20 +92,36 @@ RSpec.describe "api/v1/posts", type: :request do
 
     it 'Returns post if sending back slug' do
       user = create_user(name: 'testtest')
-      post = create_post({ user: user })
-      get "/api/v1/posts/#{post.slug}"
+      record = create_post({ user: user })
+      get "/api/v1/posts/#{record.slug}"
       parsed = JSON.parse(response.body, object_class: OpenStruct)
       expect(response).to have_http_status(200)
-      expect(parsed.data.id.to_i).to eq(post.id)
+      expect(parsed.data.id.to_i).to eq(record.id)
     end
 
-    it 'Returns post if sending back id' do
+    it 'Returns a post if sending back id' do
       user = create_user(name: 'testtest')
-      post = create_post({ user: user })
-      get "/api/v1/posts/#{post.id}"
+      record = create_post({ user: user })
+      get "/api/v1/posts/#{record.id}"
       parsed = JSON.parse(response.body, object_class: OpenStruct)
       expect(response).to have_http_status(200)
-      expect(parsed.data.id.to_i).to eq(post.id)
+      expect(parsed.data.id.to_i).to eq(record.id)
+    end
+
+    it 'Returns 5 comments with the post' do
+      user = create_user(name: 'testtest')
+      record = create_post({ user: user })
+      create_comment({ user: user, commentable: record })
+      create_comment({ user: user, commentable: record })
+      create_comment({ user: user, commentable: record })
+      create_comment({ user: user, commentable: record })
+      create_comment({ user: user, commentable: record })
+      get "/api/v1/posts/#{record.id}"
+      parsed = JSON.parse(response.body, object_class: OpenStruct)
+      expect(response).to have_http_status(200)
+      expect(parsed.data.id.to_i).to eq(record.id)
+      expect(parsed.data.attributes.comments.data.length).to eq(5)
+      expect(parsed.data.attributes.comments.data.first.attributes.user.id).to eq(user.id)
     end
   end
 
@@ -132,7 +148,7 @@ RSpec.describe "api/v1/posts", type: :request do
       end
     end
 
-    context 'as a org owner' do
+    context 'as a post owner' do
       it 'should let me update a post' do
         user = create_user
         record = create_post({ user: user })

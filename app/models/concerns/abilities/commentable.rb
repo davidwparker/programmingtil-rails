@@ -4,7 +4,7 @@ module Abilities::Commentable
   included do
     has_many :comments, as: :commentable
 
-    def add_comment(params)
+    def create_comment!(params)
       comment = comments.build(params)
       save
       comment

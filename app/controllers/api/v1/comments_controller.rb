@@ -3,17 +3,17 @@ class Api::V1::CommentsController < ApplicationController
 
   # POST /api/v1/comments
   def create
-    # authorize Comment
-    # comment = Comment.create_comment!(create_params, current_user)
-    # render json: comment_show(comment, { message: I18n.t('controllers.comments.created') })
+    authorize Comment
+    comment = Comment.create_comment!(current_user, create_params)
+    render json: comment_show(comment, { message: I18n.t('controllers.comments.created') })
   end
 
   # DELETE /api/v1/comments/:id
   def destroy
-    # comment = Comment.find(params[:id])
-    # authorize comment
-    # comment = Comment.delete_comment!(comment)
-    # render json: comment_show(comment, { message: I18n.t('controllers.comments.deleted') })
+    comment = Comment.find(params[:id])
+    authorize comment
+    comment = Comment.delete_comment!(comment)
+    render json: comment_show(comment, { message: I18n.t('controllers.comments.deleted') })
   end
 
   # GET /api/v1/comments
@@ -27,18 +27,18 @@ class Api::V1::CommentsController < ApplicationController
 
   # GET /api/v1/comments/:id
   def show
-  #   comment = Comment.find(params[:id])
-  #   render json: comment_show(comment)
-  # rescue ActiveRecord::RecordNotFound
-  #   render json: { error: I18n.t('api.not_found') }, status: 404
+    comment = Comment.find(params[:id])
+    render json: comment_show(comment)
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: I18n.t('api.not_found') }, status: 404
   end
 
   # PUT /api/v1/comments/:id
   def update
-    # comment = Comment.find(params[:id])
-    # authorize comment
-    # comment = Comment.update_comment!(comment, update_params)
-    # render json: comment_show(comment, { message: I18n.t('controllers.comments.updated') })
+    comment = Comment.find(params[:id])
+    authorize comment
+    comment = Comment.update_comment!(comment, update_params)
+    render json: comment_show(comment, { message: I18n.t('controllers.comments.updated') })
   end
 
   private

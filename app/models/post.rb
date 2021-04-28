@@ -19,6 +19,7 @@
 class Post < ApplicationRecord
   include Abilities::Commentable
   include Posts::Associations
+  include Posts::Hooks
   include Posts::Logic
   include Posts::Validations
 

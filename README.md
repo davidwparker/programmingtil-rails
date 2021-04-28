@@ -27,6 +27,24 @@ Things you may want to cover:
 
 rails s
 
+## EPISODE 21 - comments CRUD, and returning some with initial Post Show
+
+```
+modified:   README.md
+modified:   app/controllers/api/v1/comments_controller.rb
+modified:   app/models/concerns/abilities/commentable.rb
+modified:   app/models/concerns/comments/logic.rb
+modified:   app/policies/comment_policy.rb
+new file:   app/serializers/comment_for_post_show_serializer.rb
+modified:   app/serializers/comment_index_serializer.rb
+new file:   app/serializers/comment_show_serializer.rb
+modified:   app/serializers/post_index_serializer.rb
+modified:   app/serializers/post_show_serializer.rb
+modified:   spec/requests/comments_request_spec.rb
+modified:   spec/requests/posts_request_spec.rb
+modified:   spec/support/object_creators.rb
+```
+
 ## EPISODE 20 - comments model
 
 ```

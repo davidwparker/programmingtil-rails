@@ -2,15 +2,14 @@ module Comments::Logic
   extend ActiveSupport::Concern
 
   included do
-    def self.add_comment(user, params)
+    def self.create_comment!(user, params)
       klass = from_class_name(params.delete(:commentable_type))
       raise 'Not Commentable' if klass.blank?
       klass.find(params.delete(:commentable_id))
-        .add_comment(params.merge({ user_id: user.id}))
+        .create_comment!(params.merge({ user_id: user.id}))
     end
 
-    def self.delete_comment(user, params)
-      comment = Comment.where(user_id: user.id, id: params[:id]).first
+    def self.delete_comment!(comment)
       comment.update!(
         body: '[deleted]',
         user_id: nil,
@@ -19,8 +18,7 @@ module Comments::Logic
       comment
     end
 
-    def self.update_comment(user, params)
-      comment = Comment.where(user_id: user.id, id: params[:id]).first
+    def self.update_comment!(comment, params)
       comment.update!(body: params[:body])
       comment
     end
