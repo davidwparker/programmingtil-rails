@@ -26,7 +26,9 @@ class Api::V1::PostsController < ApplicationController
   # GET /api/v1/posts/:slug
   def show
     post = Post.friendly.find(params[:id])
-    render json: post_show(post)
+    options = show_options
+    options[:params] = options[:params].merge({ all: params[:all] }) if params[:all].present?
+    render json: PostShowSerializer.new(post, options).serializable_hash.to_json
   rescue ActiveRecord::RecordNotFound
     render json: { error: I18n.t('api.not_found') }, status: 404
   end

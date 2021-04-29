@@ -15,7 +15,7 @@ class CommentIndexSerializer
     }
   end
 
-  attribute :user do |comment|
+  attribute :user, if: Proc.new { |comment| comment.user.present? } do |comment|
     comment.user.for_others
   end
 end

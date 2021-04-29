@@ -12,8 +12,11 @@ class PostShowSerializer
   #
   # Show the most recent 5 comments with the users
   #
-  attribute :comments do |post|
-    comments = post.comments.includes(:user).order(id: :desc).limit(5)
+  attribute :comments do |post, params|
+    comments = post.comments.includes(:user).order(id: :desc)
+    if params[:all].blank?
+      comments = comments.limit(5)
+    end
     CommentForPostShowSerializer.new(comments, { is_collection: true })
   end
 

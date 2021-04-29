@@ -34,6 +34,8 @@ modified:   README.md
 modified:   app/controllers/api/v1/comments_controller.rb
 modified:   app/models/concerns/abilities/commentable.rb
 modified:   app/models/concerns/comments/logic.rb
+modified:   app/models/concerns/posts/hooks.rb
+modified:   app/models/post.rb
 modified:   app/policies/comment_policy.rb
 new file:   app/serializers/comment_for_post_show_serializer.rb
 modified:   app/serializers/comment_index_serializer.rb

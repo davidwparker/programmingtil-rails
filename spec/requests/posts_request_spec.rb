@@ -123,6 +123,22 @@ RSpec.describe "api/v1/posts", type: :request do
       expect(parsed.data.attributes.comments.data.length).to eq(5)
       expect(parsed.data.attributes.comments.data.first.attributes.user.id).to eq(user.id)
     end
+
+    it 'Returns all comments with param all' do
+      user = create_user(name: 'testtest')
+      record = create_post({ user: user })
+      create_comment({ user: user, commentable: record })
+      create_comment({ user: user, commentable: record })
+      create_comment({ user: user, commentable: record })
+      create_comment({ user: user, commentable: record })
+      create_comment({ user: user, commentable: record })
+      create_comment({ user: user, commentable: record })
+      get "/api/v1/posts/#{record.id}?all=true"
+      parsed = JSON.parse(response.body, object_class: OpenStruct)
+      expect(response).to have_http_status(200)
+      expect(parsed.data.id.to_i).to eq(record.id)
+      expect(parsed.data.attributes.comments.data.length).to eq(6)
+    end
   end
 
   # Update
