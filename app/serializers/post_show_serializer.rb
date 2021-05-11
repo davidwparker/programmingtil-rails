@@ -7,6 +7,7 @@ class PostShowSerializer
     :comments_count,
     :content,
     :published_at,
+    :slug,
     :title
 
   #

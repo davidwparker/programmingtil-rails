@@ -6,12 +6,13 @@ class SessionsController < Devise::SessionsController
   # POST /users/sign_in
   # Specs No
   def create
-    browser, version = params[:browser].split("||")
-    digest = Digest::SHA256.hexdigest("#{params[:os]}||||#{browser}||#{version.to_i}")
     # Check both because rspec vs normal server requests .... do different things? WTF.
-    possible_aud = request.headers['HTTP_JWT_AUD'].presence || request.headers['JWT_AUD'].presence
-    if digest != possible_aud
-      raise "Unmatched AUD"
+    if params[:browser].present?
+      browser, version = params[:browser].split("||")
+      digest = Digest::SHA256.hexdigest("#{params[:os]}||||#{browser}||#{version.to_i}")
+      if digest != possible_aud
+        raise "Unmatched AUD"
+      end
     end
     self.resource = warden.authenticate!(auth_options)
     sign_in(resource_name, resource)
