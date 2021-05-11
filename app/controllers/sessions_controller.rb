@@ -7,6 +7,7 @@ class SessionsController < Devise::SessionsController
   # Specs No
   def create
     # Check both because rspec vs normal server requests .... do different things? WTF.
+    possible_aud = request.headers['HTTP_JWT_AUD'].presence || request.headers['JWT_AUD'].presence
     if params[:browser].present?
       browser, version = params[:browser].split("||")
       digest = Digest::SHA256.hexdigest("#{params[:os]}||||#{browser}||#{version.to_i}")
