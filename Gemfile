@@ -47,6 +47,10 @@ gem 'jsonapi-serializer'
 # https://github.com/norman/friendly_id
 gem 'friendly_id', '~> 5.4.0'
 
+# Perform background queue jobs
+# https://github.com/mperham/sidekiq
+gem 'sidekiq'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

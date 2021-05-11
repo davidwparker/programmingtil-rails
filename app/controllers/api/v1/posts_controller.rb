@@ -19,7 +19,7 @@ class Api::V1::PostsController < ApplicationController
   # GET /api/v1/posts
   def index
     posts = policy_scope(Post)
-    posts = posts.includes(:user)
+    posts = posts.includes(:user).order(id: :desc)
     render json: PostIndexSerializer.new(posts, list_options).serializable_hash.to_json
   end
 

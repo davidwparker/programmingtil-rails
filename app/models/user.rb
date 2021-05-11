@@ -62,4 +62,9 @@ class User < ApplicationRecord
       { value: login.strip.downcase },
     ]).first
   end
+
+  # Make sure to send the devise emails via async
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
+  end
 end

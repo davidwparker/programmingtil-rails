@@ -1,31 +1,35 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
 # COMMANDS and things
 
 rails s
+
+## EPISODE 22 - Redis + Sidekiq
+
+Resources:
+* https://github.com/mperham/sidekiq
+
+```
+# Perform background queue jobs
+# https://github.com/mperham/sidekiq
+gem 'sidekiq'
+```
+
+```
+bundle install
+```
+
+```
+modified:   Gemfile
+modified:   Gemfile.lock
+modified:   Procfile
+modified:   README.md
+modified:   app/controllers/api/v1/posts_controller.rb
+modified:   app/controllers/sessions_controller.rb
+modified:   app/models/user.rb
+modified:   app/serializers/post_show_serializer.rb
+modified:   config/application.rb
+config/initializers/redis.rb
+config/initializers/sidekiq.rb
+```
 
 ## EPISODE 21 - comments CRUD, and returning some with initial Post Show
 
