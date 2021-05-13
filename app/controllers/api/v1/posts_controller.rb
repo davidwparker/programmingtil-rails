@@ -20,6 +20,7 @@ class Api::V1::PostsController < ApplicationController
   def index
     posts = policy_scope(Post)
     posts = posts.includes(:user).order(id: :desc)
+    posts = posts.published if params[:published].present?
     render json: PostIndexSerializer.new(posts, list_options).serializable_hash.to_json
   end
 

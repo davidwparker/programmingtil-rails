@@ -21,6 +21,7 @@ class Post < ApplicationRecord
   include Posts::Associations
   include Posts::Hooks
   include Posts::Logic
+  include Posts::Scopes
   include Posts::Validations
 
   extend FriendlyId

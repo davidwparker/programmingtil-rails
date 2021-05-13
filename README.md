@@ -1,6 +1,36 @@
 # COMMANDS and things
 
+```
+redis-server
 rails s
+bundle exec sidekiq -c 1 -q default -q mailers
+```
+
+## EPISODE 23 - Sitemap
+
+Resources:
+* https://github.com/kjvarga/sitemap_generator
+
+```
+bundle install
+```
+
+```
+rake sitemap:install
+rake sitemap:refresh
+rake sitemap:refresh:no_ping
+```
+
+```
+modified:   Gemfile
+modified:   Gemfile.lock
+modified:   README.md
+modified:   app/controllers/posts_controller.rb
+new file:   app/models/concerns/posts/scopes.rb
+modified:   app/models/post.rb
+new file:   config/sitemap.rb
+new file:   public/sitemap.xml
+```
 
 ## EPISODE 22 - Redis + Sidekiq
 
