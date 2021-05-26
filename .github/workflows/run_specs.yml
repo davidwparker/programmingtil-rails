@@ -6,7 +6,7 @@ env:
   DEVISE_JWT_SECRET_KEY: ${{ secrets.DEVISE_JWT_SECRET_KEY }}
 
 name: Rails Specs
-on: [push,pull_request]
+on: [pull_request]
 jobs:
   rspec-test:
     name: RSpec
@@ -21,7 +21,7 @@ jobs:
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
       - name: Install postgres client
