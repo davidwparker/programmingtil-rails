@@ -19,6 +19,13 @@ module ObjectCreators
     })
   end
 
+  def create_contact_us(params = {})
+    body = params[:body].presence || 'test body'
+    email = params[:email].presence || 'test@test.com'
+    name = params[:name].presence || 'tester'
+    ContactUs.create!(body: body, email: email, name: name )
+  end
+
   def create_post(params = {})
     user = params[:user].presence || create_user
     last_id = Post.limit(1).order(id: :desc).pluck(:id).first || 0
@@ -55,14 +62,21 @@ module ObjectCreators
     'Linux||5.0'
   end
 
-  def get_headers(login)
-    jwt = get_jwt(login)
-    {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-      'HTTP_JWT_AUD': get_aud,
-      'Authorization': "Bearer #{jwt}"
-    }
+  def get_headers(login = nil)
+    if login
+      jwt = get_jwt(login)
+      {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        'HTTP_JWT_AUD': get_aud,
+        'Authorization': "Bearer #{jwt}"
+      }
+    else
+      {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      }
+    end
   end
 
   def get_jwt(login)

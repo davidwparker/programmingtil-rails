@@ -15,8 +15,7 @@ RSpec.describe "api/v1/comments", type: :request do
         user = create_user
         post = create_post({ user: user })
         headers = get_headers(user.username)
-        url = '/api/v1/comments'
-        post url,
+        post '/api/v1/comments',
           params: '{ "comment": { "body": "comment body", "commentable_type": "Post", "commentable_id": ' + post.id.to_s + ' } }',
           headers: headers
         parsed = JSON.parse(response.body, object_class: OpenStruct)

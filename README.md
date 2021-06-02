@@ -6,6 +6,27 @@ rails s
 bundle exec sidekiq -c 1 -q default -q mailers
 ```
 
+## EPISODE 26 - adding a contact us form and testing activejob
+
+```
+new file:   app/controllers/api/v1/contact_us_controller.rb
+new file:   app/mailers/emails/contact_us_mailer.rb
+new file:   app/models/concerns/contact_uses/hooks.rb
+new file:   app/models/concerns/contact_uses/validations.rb
+new file:   app/models/contact_us.rb
+modified:   app/models/user.rb
+new file:   app/views/emails/contact_us_mailer/contact.html.erb
+modified:   config/environments/test.rb
+modified:   config/locales/en.yml
+modified:   config/routes.rb
+new file:   db/migrate/20210602204347_create_contact_us.rb
+modified:   db/schema.rb
+new file:   spec/models/contact_us_spec.rb
+modified:   spec/requests/comments_request_spec.rb
+new file:   spec/requests/contact_us_request_spec.rb
+modified:   spec/support/object_creators.rb
+```
+
 ## EPISODE 25 - putting sitemap on AWS S3
 
 TODO:
