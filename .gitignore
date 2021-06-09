@@ -35,3 +35,5 @@ yarn-debug.log*
 
 # Ignore redis
 *.rdb
+
+/config/credentials/production.key

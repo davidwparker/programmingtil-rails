@@ -6,6 +6,51 @@ rails s
 bundle exec sidekiq -c 1 -q default -q mailers
 ```
 
+## EPISODE 25 - putting sitemap on AWS S3
+
+TODO:
+```
+Ensure credentials are set in Rails credentials
+Create new buckets on AWS S3
+```
+
+```
+modified:   Gemfile
+modified:   Gemfile.lock
+modified:   README.md
+modified:   config/credentials.yml.enc
+modified:   config/sitemap.rb
+```
+
+## EPISODE 24 - Credentials
+
+Resources:
+* https://edgeguides.rubyonrails.org/security.html#custom-credentials
+* https://s3.console.aws.amazon.com/
+* https://blog.saeloun.com/2019/10/10/rails-6-adds-support-for-multi-environment-credentials.html
+
+Commands
+```
+rails credentials:help
+rails credentials:edit
+rails credentials:edit --environment production
+EDITOR=nano rails credentials:edit
+cat config/credentials/production.key
+heroku config:set RAILS_MASTER_KEY=`cat config/master.key`
+```
+
+Setup
+```
+Create user in IAM
+Create bucket in S3
+```
+
+Usage
+```
+Rails.application.credentials.config
+Rails.application.credentials.aws[:access_key_id]
+```
+
 ## EPISODE 23 - Sitemap
 
 Resources:

@@ -55,6 +55,10 @@ gem 'sidekiq'
 # https://github.com/kjvarga/sitemap_generator
 gem 'sitemap_generator'
 
+# AWS for storage
+# https://github.com/aws/aws-sdk-ruby
+gem 'aws-sdk-s3'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
